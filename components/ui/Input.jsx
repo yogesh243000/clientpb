@@ -6,6 +6,8 @@ export const Input = ({ type, placeholder, onChange, value }) => {
       value={value}
       onChange={onChange}
       className="w-full border border-yellow-600 rounded-md box-border p-2 "
+      required
+      autoComplete="off"
     />
   );
 };
