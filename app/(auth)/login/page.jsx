@@ -6,6 +6,7 @@ import { Button } from "../../../components/ui/Button";
 import { Error } from "../../../components/ui/Error"; // Add this import
 import { useRouter } from "next/navigation"; // Import useRouter
 import axiosInstance from "../../../lib/axiosInstance";
+import Link from "next/link";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -47,25 +48,37 @@ const LoginPage = () => {
         <h1 className="text-2xl font-bold text-center">Login Form</h1>{" "}
         {/* Fixed Title */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <Label text="Email" id="email" />
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Label text="Password" id="password" />
-          <Input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="flex flex-col gap-2">
+            <Label text="Email" id="email" />
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label text="Password" id="password" />
+            <Input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <Error error={error} /> {/* Display error message */}
           <Button type="submit" disabled={isLoading}>
             {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
+        <div className="pb-6 mt-4">
+          <p className="text-sm">
+            Don't have an account?{" "}
+            <span className="hover:underline text-blue-500">
+              <Link href="/register">Register</Link>
+            </span>
+          </p>
+        </div>
       </div>
     </main>
   );
