@@ -3,27 +3,28 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useAuth from "../../lib/useAuth"; // Import from lib
-import Unauthorized from "../../components/serverProps/401";
 
 const DashboardPage = () => {
-  const { user, error } = useAuth();
+  const { user, authError, isAuthenticated } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (error?.message === "Unauthorized") {
+    if (authError) {
       router.push("/login");
     }
-  }, [error, router]);
+  }, [authError, router]); // Redirect only if authError exists
 
-  if (!user && !error) return <p>Loading...</p>;
-
-  if (error?.message === "Unauthorized") {
-    return <Unauthorized />;
+  if (!isAuthenticated) {
+    return (
+      <p style={{ color: "red", fontWeight: "bold" }}>
+        Please log in to access this page.
+      </p>
+    );
   }
 
   return (
     <div>
-      <h1>Welcome, {user?.name}</h1>
+      <h1>Welcome, {user?.name}!</h1>
       <p>Email: {user?.email}</p>
     </div>
   );
