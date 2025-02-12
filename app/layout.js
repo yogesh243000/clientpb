@@ -1,4 +1,4 @@
-import NavBar from "../components/ui/NavBar";
+import ClientLayout from "../components/layouts/ClientLayout";
 import "./globals.css";
 
 export const metadata = {
@@ -10,8 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        <main className="container mx-auto px-4 py-6">{children}</main>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
